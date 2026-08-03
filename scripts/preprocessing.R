@@ -12,19 +12,28 @@ pacman::p_load(readr,
 tbl <- read_tsv("data/4ZJQV2-expression-matrix.tsv")
 
 
-# get columns we want and write as a new file
+# split by cpm and counts
 # normalized matrix
+cpm_cols <- tbl |> 
+  select(ends_with("_cpm")) |> 
+  names()
+
+cpm_cols_sorted <- cpm_cols[order(as.numeric(str_extract(cpm_cols, "(?<=_)\\d+(?=_cpm)")))]
+
 tbl_norm <- tbl |>
-  select(-c("gene_id", "gene_biotype")) |>
-  select(gene_name, ends_with("_cpm"))
+  select(gene_name, all_of(cpm_cols_sorted))
 
 write_csv(tbl_norm, "data/normalized_matrix.csv")
 
+
 # raw counts
+ct_cols <- tbl |>
+  select(ends_with("_count")) |>
+  names() 
+
+ct_cols_sorted <- ct_cols[order(as.numeric(str_extract(ct_cols, "(?<=_)\\d+(?=_count)")))]
+
 tbl_ct <- tbl |>
-  select(-c("gene_id", "gene_biotype")) |>
-  select(gene_name, ends_with("_count"))
+  select(gene_name, all_of(ct_cols_sorted))
 
 write_csv(tbl_ct, "data/counts_matrix.csv")
-
-
