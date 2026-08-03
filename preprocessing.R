@@ -13,5 +13,17 @@ tbl <- read_tsv("data/4ZJQV2-expression-matrix.tsv")
 
 
 # get columns we want and write as a new file
-new_tbl <- tbl |>
-  select(-c("gene_id", "gene_biotype"))
+tbl_norm <- tbl |>
+  select(-c("gene_id", "gene_biotype")) |>
+  select(gene_name, ends_with("_cpm"))
+
+write_csv(tbl_norm, "data/normalized_matrix.csv")
+
+
+tbl_ct <- tbl |>
+  select(-c("gene_id", "gene_biotype")) |>
+  select(gene_name, ends_with("_count"))
+
+write_csv(tbl_ct, "data/counts_matrix.csv")
+
+
