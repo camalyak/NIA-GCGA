@@ -1,4 +1,12 @@
 # Author: Kayla Mac
 # Date: 8/3/26
 # Dataset: Plasmidsaurus NIA-GCGA
-# Purpose: format counts file for further analysis
+# Purpose: differential gene analysis using DESeq2
+
+
+pacman::p_load(DESeq2)
+
+
+# load counts
+path <- ("data/counts_matrix.csv")
+counts <- as.matrix(data.table::fread(path, header = T, colClasses = "integer"), rownames = "gene_name")

@@ -36,4 +36,8 @@ ct_cols_sorted <- ct_cols[order(as.numeric(str_extract(ct_cols, "(?<=_)\\d+(?=_c
 tbl_ct <- tbl |>
   select(gene_name, all_of(ct_cols_sorted))
 
+# for DESeq2, need to convert from dbl to int
+tbl_ct <- tbl_ct |> 
+  mutate(across(ends_with("_count"), ~ as.integer(round(.x))))
+
 write_csv(tbl_ct, "data/counts_matrix.csv")
