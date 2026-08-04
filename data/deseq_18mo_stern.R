@@ -1,7 +1,7 @@
 # Author: Kayla Mac
-# Date: 8/3/26
+# Date: 8/4/26
 # Dataset: Plasmidsaurus NIA-GCGA
-# Purpose: differential gene analysis using DESeq2 - 9 month saline v agonist
+# Purpose: differential gene analysis using DESeq2 - 18 mo saline v agonist
 
 
 pacman::p_load(DESeq2)
@@ -32,7 +32,7 @@ counts <- counts[ ,sel]
 
 # group membership for samples
 gs <- factor(sml)
-groups <- make.names(c("9_mo_A","9_mo_S"))
+groups <- make.names(c("18_mo_S","18_mo_A"))
 levels(gs) <- groups
 sample_info <- data.frame(Group = gs, row.names = colnames(counts))
 
@@ -58,6 +58,3 @@ r |>
   tibble::rownames_to_column("GeneID") |>
   merge(annot[, c("GeneID", "Symbol", "Description")], by = "GeneID", sort = FALSE) |>
   write.csv("data/DESeq_9mo_stern.csv", row.names = FALSE)
-
-
-
