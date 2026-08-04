@@ -52,4 +52,6 @@ storage.mode(tbl_ct) <- "integer"
 tbl_ct |>
   as.data.frame() |>
   tibble::rownames_to_column("GeneID") |>
-  write.csv("counts_matrix.csv", row.names = FALSE)
+  write.csv("data/counts_matrix.csv", row.names = FALSE)
+
+a <- read_csv("data/counts_matrix.csv")
