@@ -57,4 +57,4 @@ r |>
   as.data.frame() |>
   tibble::rownames_to_column("GeneID") |>
   merge(annot[, c("GeneID", "Symbol", "Description")], by = "GeneID", sort = FALSE) |>
-  write.csv("data/DESeq_18mo_stern.csv", row.names = FALSE)
+  write.csv("data/deseq_18mo_stern.csv", row.names = FALSE)
