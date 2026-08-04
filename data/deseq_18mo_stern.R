@@ -19,7 +19,7 @@ rownames(annot) <- annot$GeneID
 
 
 # sample selection: 
-sm <- "11111111110000000000XXXXXXXXXXXXXXXXXXXX"
+sm <- "XXXXXXXXXXXXXXXXXXXX11111111110000000000"
 sml <- strsplit(sm, split="")[[1]]
 
 
@@ -32,7 +32,7 @@ counts <- counts[ ,sel]
 
 # group membership for samples
 gs <- factor(sml)
-groups <- make.names(c("18_mo_S","18_mo_A"))
+groups <- make.names(c("18_mo_A","18_mo_S"))
 levels(gs) <- groups
 sample_info <- data.frame(Group = gs, row.names = colnames(counts))
 
@@ -57,4 +57,4 @@ r |>
   as.data.frame() |>
   tibble::rownames_to_column("GeneID") |>
   merge(annot[, c("GeneID", "Symbol", "Description")], by = "GeneID", sort = FALSE) |>
-  write.csv("data/DESeq_9mo_stern.csv", row.names = FALSE)
+  write.csv("data/DESeq_18mo_stern.csv", row.names = FALSE)
