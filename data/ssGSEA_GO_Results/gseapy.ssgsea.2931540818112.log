@@ -1,0 +1,11 @@
+2026-08-04 14:52:49,523 ssgsea2931540818112::[INFO    ] Parsing data files for ssGSEA...........................
+2026-08-04 14:52:49,523 ssgsea2931540818112::[DEBUG   ] Input data is a DataFrame with gene names
+2026-08-04 14:52:49,530 ssgsea2931540818112::[INFO    ] Enrichr library gene sets already downloaded in: C:\Users\kaylamac\.cache/gseapy, use local file
+2026-08-04 14:52:49,558 ssgsea2931540818112::[INFO    ] 5343 gene_sets have been filtered out when max_size=500 and min_size=15
+2026-08-04 14:52:49,559 ssgsea2931540818112::[ERROR   ] No gene sets passed through filtering condition !!! 
+Hint 1: Try to lower min_size or increase max_size !
+Hint 2: Check gene symbols are identifiable to your gmt input.
+Hint 3: Gene symbols curated in Enrichr web services are all upcases.
+
+2026-08-04 14:52:49,559 ssgsea2931540818112::[ERROR   ] The first entry of your gene_sets (gmt) look like this : { 'De Novo' AMP Biosynthetic Process (GO:0044208): [ATIC, PAICS, PFAS, ADSS1, ADSS2, GART]}
+2026-08-04 14:52:49,559 ssgsea2931540818112::[ERROR   ] The first 5 genes look like this : [  ]

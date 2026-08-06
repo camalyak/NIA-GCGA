@@ -8,10 +8,10 @@ tpm_log = tpm_log.dropna()
 
 ss = gp.ssgsea(data=tpm_log, 
                gene_sets='GO_Biological_Process_2025', 
-               outdir='ssGSEA_GO_Results', 
+               outdir='data/ssGSEA_GO_Results', 
                sample_norm_method='rank', 
                no_plot=False)
 
 
-ss.res2d.to_csv("ssGSEA_scores.csv")
+ss.res2d.to_csv("data/ssGSEA_scores.csv")
 

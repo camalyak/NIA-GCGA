@@ -31,8 +31,8 @@ def get_mouse_gene_lengths(gene_list):
     return lengths
 
 
-df = pd.read_csv("data/counts_matrix.csv", index_col=0)
-lengths_dict = get_mouse_gene_lengths(df.index.tolist())
+df = pd.read_csv("data/counts_matrix_tpm.csv", index_col=0)
+lengths_dict = get_mouse_gene_lengths(df.index.dropna().tolist())
 gene_lengths = pd.Series(lengths_dict)
 
 # Align and calculate TPM

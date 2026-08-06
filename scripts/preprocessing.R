@@ -37,6 +37,10 @@ tbl_ct <- tbl |>
   dplyr::select(GeneID, all_of(ct_cols_sorted))
 
 
+tbl_ct_tpm <- tbl |>
+  dplyr::select(gene_name, all_of(ct_cols_sorted))
+
+
 # for DESeq2, need to convert from dbl to int
 tbl_ct <- tbl_ct |>
   filter(!is.na(GeneID)) |>
@@ -49,9 +53,27 @@ tbl_ct <- tbl_ct |>
 storage.mode(tbl_ct) <- "integer"
 
 
+tbl_ct_tpm <- tbl_ct_tpm |>
+  filter(!is.na(gene_name)) |>
+  group_by(gene_name) |>
+  summarise(across(everything(), sum)) |>
+  column_to_rownames("gene_name") |>
+  as.matrix() |>
+  round()
+
+storage.mode(tbl_ct_tpm) <- "integer"
+
+
 tbl_ct |>
   as.data.frame() |>
   tibble::rownames_to_column("GeneID") |>
   write.csv("data/counts_matrix.csv", row.names = FALSE)
 
-a <- read_csv("data/counts_matrix.csv")
+
+tbl_ct_tpm |>
+  as.data.frame() |>
+  tibble::rownames_to_column("Gene") |>
+  write.csv("data/counts_matrix_tpm.csv", row.names = FALSE)
+
+
+
