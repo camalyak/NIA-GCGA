@@ -3,21 +3,22 @@
 # Dataset: Plasmidsaurus NIA-GCGA
 # Purpose: dotplots of GSEA processes where fdr <= 0.05 
 
-pacman::p_load(openxlsx)
+pacman::p_load(openxlsx,
+               tidyverse)
 
 
 make_dotplot <- function(gsea_results, title="GSEA Dotplot", top_n=20, fdr_cutoff=0.05, save_path=NULL) {
   
   # Filter and calculate Ratio
-  filtered_results <- gsea_results %>%
-    filter(fdr <= fdr_cutoff) %>%
-    separate(gene_ratio, into = c("hits", "total"), sep = "/", remove = FALSE, convert = TRUE) %>%
+  filtered_results <- gsea_results |>
+    filter(fdr <= fdr_cutoff) |>
+    separate(gene_ratio, into = c("hits", "total"), sep = "/", remove = FALSE, convert = TRUE) |>
     mutate(
       ratio = hits / total,
       minus_log10_fdr = -log10(ifelse(fdr == 0, 1e-10, fdr)),
       wrapped_term = stringr::str_wrap(Term, width = 35)
-    ) %>%
-    arrange(fdr) %>%
+    ) |>
+    arrange(fdr) |>
     head(top_n)
   
   p <- ggplot(filtered_results, aes(x = nes, 
@@ -64,3 +65,20 @@ make_dotplot(gsea_file,
              fdr_cutoff = 0.05, 
              save_path = "images/18mo_stern_gsea.png")
 
+
+gsea_file <- read.xlsx("data/saline_stern_gsea.xlsx")
+
+make_dotplot(gsea_file, 
+             title = "Pathway Enrichment in 18 Month Saline\nRelative to 9 Month", 
+             top_n = 20, 
+             fdr_cutoff = 0.05, 
+             save_path = "images/saline_stern_gsea.png")
+
+
+gsea_file <- read.xlsx("data/agonist_stern_gsea.xlsx")
+
+make_dotplot(gsea_file, 
+             title = "Pathway Enrichment in 18 Month Agonist\nRelative to 9 Month", 
+             top_n = 20, 
+             fdr_cutoff = 0.05, 
+             save_path = "images/agonist_stern_gsea.png")

@@ -68,3 +68,13 @@ gsea_file.to_excel("C:\\Users\\kaylamac\\Documents\\Code\\NIA-GCGA\\data\\9mo_st
 dge_file = pd.read_csv("C:\\Users\\kaylamac\\Documents\\Code\\NIA-GCGA\\data\\deseq_18mo_stern.csv")
 gsea_file = gsea_analysis(dge_file)
 gsea_file.to_excel("C:\\Users\\kaylamac\\Documents\\Code\\NIA-GCGA\\data\\18mo_stern_gsea.xlsx", index = False)
+
+
+dge_file = pd.read_csv("C:\\Users\\kaylamac\\Documents\\Code\\NIA-GCGA\\data\\deseq_saline_stern.csv")
+gsea_file = gsea_analysis(dge_file)
+gsea_file.to_excel("C:\\Users\\kaylamac\\Documents\\Code\\NIA-GCGA\\data\\saline_stern_gsea.xlsx", index = False)
+
+
+dge_file = pd.read_csv("C:\\Users\\kaylamac\\Documents\\Code\\NIA-GCGA\\data\\deseq_agonist_stern.csv")
+gsea_file = gsea_analysis(dge_file)
+gsea_file.to_excel("C:\\Users\\kaylamac\\Documents\\Code\\NIA-GCGA\\data\\agonist_stern_gsea.xlsx", index = False)
